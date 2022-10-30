@@ -2,8 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
 const app = express();
+const bcrypt = require('bcrypt');
 
-const mongoUri = `mongodb+srv://admin:testing123@cluster0.lwqgg.mongodb.net/MyApp?retryWrites=true&w=majority`;
+const mongoUri = `mongodb+srv://admin:testing123@cluster0.lwqgg.mongodb.net/WebAutH?retryWrites=true&w=majority`;
 mongoose.connect(mongoUri);
 
 /// MIDDLEWARE
@@ -28,9 +29,22 @@ app.post('/api/user',(req,res)=>{
     })
 })
 
+app.post('/api/user/login',(req,res)=>{
+    // 1 -find the user,if good, -> move forward
+    User.findOne({'email': req.body.email},(err,user)=>{
+        if(err) res.status(400).send(err);
+        if(!user) res.json({message:'User not found'})
 
+        // 2 - compare the password with the HASHED password on the DB, -> move forward
+        user.comparePassword(req.body.password,(err,isMatch)=>{
+            if(err) res.status(400).send(err);
+            if(!isMatch) res.json({message:'Bad password'})
+            res.status(200).send(isMatch)
+        })
+    })
+})
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 app.listen(port,()=>{
     console.log(`started on port ${port}`)
 })
