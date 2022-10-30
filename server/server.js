@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const app = express();
 const bcrypt = require('bcrypt');
 
-const mongoUri = `mongodb+srv://admin:testing123@cluster0.lwqgg.mongodb.net/WebAutH?retryWrites=true&w=majority`;
+const mongoUri = ``;
 mongoose.connect(mongoUri);
 
 /// MIDDLEWARE
