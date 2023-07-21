@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+//Dont forget export => module.exports = {User}
 const userSchema = mongoose.Schema({
     email:{
         type:String,
