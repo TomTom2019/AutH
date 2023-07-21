@@ -3,8 +3,12 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
 const app = express();
 
+<<<<<<< HEAD
 // connect to database
 const mongoUri = `mongodb+srv://admin:testing123@cluster0.lwqgg.mongodb.net/WebAutH?retryWrites=true&w=majority`;
+=======
+const mongoUri = ``;
+>>>>>>> 9d49e182bf60bd5c93dd232c0d90c46857b46cdc
 mongoose.connect(mongoUri);
 
 ///MIDDLEWARE
