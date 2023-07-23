@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
 const app = express();
+const bcrypt = require('bcrypt');
 
 
 // connect to database
@@ -35,6 +36,25 @@ app.post('/api/user',(req,res)=>{
         res.status(200).send(doc)
     })
 })
+
+// ROUTE GERISTER USER
+app.post('/api/user/login',(req,res)=>{
+    // 1 -find the user,if good, -> move forward
+    User.findOne({'email': req.body.email},(err,user)=>{
+        if(err) res.status(400).send(err);
+        if(!user) res.json({message:'User not found'})
+  
+      // 2 - compare the password with the HASHED password on the DB, -> move forward-- isMatch = true or false
+      bcrypt.compare(req.body.password,user.password,(err,isMatch)=>{
+            if(err) res.status(400).send(err);
+            
+            //3 send response
+            res.status(200).send(isMatch)
+         })
+             
+        })
+    })
+
 
 
 
