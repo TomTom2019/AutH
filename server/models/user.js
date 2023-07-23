@@ -17,7 +17,8 @@ const userSchema = mongoose.Schema({
     }
 })
 
-// Middleware save =>  userSchema
+// Middleware save =>  userSchema . this =user
+// this code run before
 userSchema.pre('save',function(next){
     var user = this;
 
