@@ -36,6 +36,16 @@ userSchema.pre('save',function(next){
     }
 })
 
+/// compare the password 2
+//candidatePassword = req.body.password
+// this.password = hash password
+userSchema.methods.comparePassword = function(candidatePassword,cb){
+    bcrypt.compare(candidatePassword,this.password,function(err,isMatch){
+        if(err) cb(err)
+        cb(null,isMatch)
+    })
+}
+
 
 
 const User = mongoose.model('User',userSchema)
