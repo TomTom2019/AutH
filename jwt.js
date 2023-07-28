@@ -1,16 +1,4 @@
-/*MD5 => encriptions  => secretHashed
-const {MD5} = require("crypto-js");
-const secret = 'superSecretPassword'
-const secretHashed ='jdjdjdjdjdjdjhsh'
 
-
-const user = {
-	id:1,
-	token:MD5('pass123').toString() + secretHashed
-
-}
-
-console.log(user)*/
 const jwt = require("jsonwebtoken");
 
 let id = '100'

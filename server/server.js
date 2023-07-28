@@ -49,7 +49,11 @@ app.post('/api/user/login',(req,res)=>{
             if(err) res.status(400).send(err);
             if(!isMatch) res.json({message:'Bad password'})
 
-                res.status(200).send(isMatch)
+// generateToken => stored in browser | cookie => auth => to postam
+               user.generateToken((err,user)=>{
+               if(err) res.status(400).send(err);
+                res.cookie('auth',user.token).send('ok')
+        })
 
             })
               
